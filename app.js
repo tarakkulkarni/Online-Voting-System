@@ -21,7 +21,8 @@ db.connect((e) => {
 ///////////////////////////////////////////////////////////////////////////
 db.query(
     'SELECT* FROM `course`',
-    (e, result, fields) => {
+    (e, result) => {
+        if(e) throw e;
         console.log(result);
     }
 );
