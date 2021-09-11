@@ -1,6 +1,31 @@
 const express = require('express');
+const mysql = require('mysql2');
 const ejs = require("ejs");
+require('dotenv').config();
 
+///////////////////////////////////////////////////////////////////////////
+const db = mysql.createConnection({
+    host: 'localhost',
+    user:'root',
+    password: process.env.PASSWORD,
+    database:'university'
+});
+
+db.connect((e) => {
+    if(e){
+        throw e;
+    } 
+    console.log("Connected");
+    
+});
+///////////////////////////////////////////////////////////////////////////
+db.query(
+    'SELECT* FROM `course`',
+    (e, result, fields) => {
+        console.log(result);
+    }
+);
+///////////////////////////////////////////////////////////////////////////
 
 const app = express();
 app.set('view engine','ejs');
