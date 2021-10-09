@@ -1,0 +1,10 @@
+Delimiter $$
+create procedure updatevotecount (in ele_id int, in can_id varchar(20))
+begin
+Declare newvotes int;
+select votes into newvotes from results where election_id = ele_id and candidate_id = can_id;
+set newvotes = newvotes + 1;
+update results
+set votes = newvotes where election_id = ele_id and candidate_id = can_id;
+end $$
+Delimiter ;

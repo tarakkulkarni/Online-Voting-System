@@ -1,0 +1,34 @@
+<%- include('partials/header') %>
+<div class="container mt-5">
+  <h1 class="main-heading"> Election details </h1>
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="card">
+        <div class="card-body">
+          <form class="create-election-form "action="/createElection" method="POST">
+              <div class="form-group">
+                <label for="text">Id</label>
+                <input type="text" class="form-control" name="election_id" placeholder="id">
+              </div>
+              <div class="form-group">
+                <label for="text">Name</label>
+                <input type="text" class="form-control" name="election_name" placeholder="name">
+              </div>
+              <div class="form-group">
+                <label for="text">Class</label>
+                <input type="text" class="form-control" name="election_class" placeholder="class">
+              </div>
+              <div class="form-group">
+                <label for="text">Year</label>
+                <input type="text" class="form-control" name="year" placeholder="year">
+              </div>
+              <div class="blue-button">
+                  <button type="submit" class="btn btn-lg btn-primary">Create</button>
+              </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('partials/footer') %>

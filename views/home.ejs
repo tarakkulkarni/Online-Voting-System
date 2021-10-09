@@ -1,0 +1,12 @@
+<%- include('partials/header') %>
+<h1 class="main-heading"> Welcome </h1>
+<form action = "/home" method = "POST">
+    <!-- <a class="btn btn-lg btn-primary btn-block" href="/createElection" role="button">Create Election</a> -->
+    <div class="blue-button">
+      <a class="btn btn-lg btn-primary" href="/candidateApplication" role="button">Apply As Candidate</a>
+    </div>
+    <div class="blue-button">
+        <a class="btn btn-lg btn-primary" href="/vote" role="button">Vote for Candidate</a>
+    </div>
+</form>
+<%- include('partials/footer') %>
