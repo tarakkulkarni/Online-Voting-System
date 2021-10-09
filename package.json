@@ -16,5 +16,14 @@
     "mysql2": "^2.3.0",
     "nodemon": "^2.0.13",
     "passport": "^0.4.1"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AmeyaKulkarni2001/Online-Voting-System.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AmeyaKulkarni2001/Online-Voting-System/issues"
+  },
+  "homepage": "https://github.com/AmeyaKulkarni2001/Online-Voting-System#readme"
 }
