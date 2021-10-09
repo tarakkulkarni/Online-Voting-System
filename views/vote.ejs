@@ -4,10 +4,12 @@
 <% candidates.forEach((ele) => { %>
    <div class="show-candidates">
     <ul class="list-group">
-        <li class="list-group-item active">Candidate ID <%= ele.candidate_id %></li>
-        <li class="show-election-row list-group-item">Election <%= ele.election_name %></li>
-        <li class="show-election-row list-group-item">Election ID <%= ele.election_id %></li>
-        <li class="show-election-row list-group-item">Name <%= ele.candidate_name %></li>
+        <li class="list-group-item active">Candidate ID: <%= ele.candidate_id %></li>
+        <li class="show-election-row list-group-item">Name: <%= ele.candidate_name %></li>
+        <li class="show-election-row list-group-item">Election ID: <%= ele.election_id %></li>
+        <li class="show-election-row list-group-item">Election: <%= ele.election_name %></li>
+        <li class="show-election-row list-group-item">Class: <%= ele.can_class %></li>
+        
       </ul>
   </div>
 <% }); %>
@@ -20,26 +22,20 @@
         <div class="card-body">
           <form action="/vote" method="POST">
 
-            <div class="form-group">
-                <label for="text">Candidate Name</label>
-                <input type="text" class="form-control" name="canname" placeholder="Enter Candidate Name">
+              <div class="form-group">
+                <label for="text">Election Id</label>
+                <input type="text" class="form-control" name="eleid" placeholder="Enter Election ID">
               </div>
               <div class="form-group">
                 <label for="text">Candidate ID</label>
                 <input type="text" class="form-control" name="canid" placeholder="Enter Candidate ID">
               </div>
-              <div class="form-group">
-                <label for="text">Election Name</label>
-                <input type="text" class="form-control" name="elename" placeholder="Enter Election Name">
-              </div>
+              
               <div class="form-group">
                 <label for="text">Candidates Class</label>
                 <input type="text" class="form-control" name="class" placeholder="Class">
               </div>
-              <div class="form-group">
-                <label for="text">Election Id</label>
-                <input type="text" class="form-control" name="eleid" placeholder="Enter Election ID">
-              </div>
+              
 
             <div class="blue-button">
               <button type="submit" class="btn btn-lg btn-primary">Vote</button>

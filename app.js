@@ -7,7 +7,7 @@ require("dotenv").config();
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "Tar#mysqlDB@1810",
+  password: process.env.PASSWORD,
   database: "Online_Voting",
 });
 
@@ -35,7 +35,7 @@ app.use(express.json());
 //     );
 // });
 
-var loginfo = {
+let loginfo = {
   id: String,
   class: String,
 };
@@ -53,14 +53,14 @@ app
   })
 
   .post((req, res) => {
-    var ret = [];
+    let ret = [];
     const id = req.body.username;
     const password = req.body.password;
     const sql = `Select user_id, user_password, user_class, year FROM user WHERE user_id = "${req.body.username}" AND user_password = "${req.body.password}"`;
     db.query(sql, (e, result) => {
       if (e) throw e;
       // console.log(result);
-      for (var i of result) {
+      for (let i of result) {
         ret.push(i);
       }
 
@@ -104,15 +104,8 @@ app
       loginfo.id = req.body.id;
       loginfo.class = req.body.class;
     });
-    if (id.startsWith("A")) {
-      res.redirect("/admin");
-      return;
-    } else if (id.startsWith("C")) {
-      res.redirect("/candidate");
-      return;
-    } else {
-      res.redirect("/home");
-    }
+    res.redirect("/admin");
+    
   });
 /////////////////////////////////////////////////////////////////////////////
 app
@@ -130,7 +123,7 @@ app
   })
 
   .post((req, res) => {
-    var ret = [];
+    let ret = [];
     const id = req.body.username;
     const password = req.body.password;
     // const sql = `Select id,password FROM user WHERE id = ${req.body.username} AND password = "${req.body.password}"`
@@ -158,8 +151,8 @@ app
     const data = [];
     const sql = `Select * from user where user_id like "${loginfo.id}"`;
     db.query(sql, (e, result) => {
-      if (e) throw e;
-      for (var i of result) {
+      if (e) res.redirect("/");
+      for (let i of result) {
         data.push(i);
       }
       res.render("candidateApplication", { election: data });
@@ -191,17 +184,30 @@ app
   });
 /////////////////////////////////////////////////////////////////////////////
 // app.route("/showElection")
-const ret = [];
-const sql = `Select * from election where election_status = 0`;
-db.query(sql, (e, result) => {
-  if (e) throw e;
-  for (var i of result) {
-    ret.push(i);
-  }
-});
+let ret = [];
+
 
 app.get("/showElection", (req, res) => {
-  res.render("showElection", { election: ret });
+  const sql = `Select * from election where election_status = 0`;
+  db.query(sql, (e, result) => {
+    if (e) throw e;
+    for (let i of result) {
+      ret.push(i);
+    }
+  });
+
+  setTimeout(() => {
+    if(ret.length != 0){
+      res.render("showElection", { election: ret });
+    }
+    else{
+      res.send("<h1> No Elections RN</h1>");
+    }    
+    ret = [];
+  },200)
+
+  
+  
 });
 
 // app.get("/result",(req,res)=>{
@@ -209,26 +215,55 @@ app.get("/showElection", (req, res) => {
 // })
 /////////////////////////////////////////////////////////////////////////////
 // app.route("/vote")
-const ret1 = [];
-const sql1 = `select * from candidates where election_id in (select election_id from election where election_status = 0)`;
-db.query(sql1, (e, result) => {
-  if (e) throw e;
-  for (var i of result) {
-    ret1.push(i);
-  }
-});
+let ret1 = [];
+// let ret2 = [];
+
 
 app.get("/vote", (req, res) => {
-  res.render("vote", { candidates: ret1 });
+  const sql1 = `select * from candidates where election_id in (select election_id from election where election_status = 0)`;
+  db.query(sql1, (e, result) => {
+    if (e) throw e;
+    for (let i of result) {
+      ret1.push(i);
+    }
+  });
+  setTimeout(() => {
+    res.render("vote", { candidates: ret1 });
+    ret1 = [];
+  },200)
+  
 });
 
 app.post("/vote", (req, res) => {
+  const sql3 = `select * from voted where user_id = "${loginfo.id}" and election_id = "${req.body.eleid}"`
+  db.query(sql3,(e,result) => {
+    if(e) throw e;
+    for (let i of result) {
+      ret1.push(i);
+    }
+  })
+  setTimeout(() => {
+    console.log(ret1);
+    if(ret1.length !== 0){
+      res.send("<h1>Dont multi vote ;)</h1>");
+      return;
+    }
+  },200);
+  
+  
+  
   if (loginfo.class === req.body.class) {
+    const sql1 = `insert into voted values ("${loginfo.id}","${req.body.eleid}");`
+    db.query(sql1,(e,result) => {
+      if(e) throw e;
+    })
+
     const sql = `call updatevotecount(${req.body.eleid},'${req.body.canid}')`;
     db.query(sql, (e, result) => {
       if (e) throw e;
       res.redirect("/home");
     });
+    
   } else {
     res.send("<h1> You cannot vote for another class </h1>");
   }
@@ -249,23 +284,34 @@ app
     });
   });
 /////////////////////////////////////////////////////////////////////////////
-const ret2 = [];
-// const sql2 = `select * from results where election_id in (select election_id from election where election_status = 1) `
-const sql2 = `select
-                distinct c.election_name, candidate_name, votes
-                from results r
-                inner join candidates c using(candidate_id)
-                where c.election_id in (select election_id from election where election_status = 1)
-                order by votes DESC;`;
-db.query(sql2, (e, result) => {
-  if (e) throw e;
-  for (var i of result) {
-    ret2.push(i);
-  }
-});
+let ret2 = [];
 
 app.get("/result", (req, res) => {
-  res.render("result", { results: ret2 });
+  
+  const sql2 = `select
+                distinct c.election_name,can_class, candidate_name, votes
+                from results r 
+                inner join candidates c using(candidate_id)
+                where c.election_id in (select election_id from election where election_status = 1)
+                order by can_class,
+                votes DESC             
+                ;`;
+  db.query(sql2, (e, result) => {
+    if (e) throw e;
+    for (let i of result) {
+      ret2.push(i);
+    }
+  })
+  setTimeout(() => {
+    if(ret2.length != 0){
+      res.render("result", { results: ret2 });
+    }
+    else {
+      res.send("<h1>Elections are still going on</h1>");
+    }  
+    ret2 = [];
+  }, 200);
+  
 });
 
 // app.post("/result",(req,res) => {
