@@ -17,7 +17,7 @@ router.get("", (req, res) => {
     if (ret.length != 0) {
       res.render("showElection", { election: ret });
     } else {
-      res.send("<h1> No Elections RN</h1>");
+      res.send("<h1> No Elections Right Now</h1>");
     }
     ret = [];
   }, 200);

@@ -7,7 +7,7 @@
         <div class="card-body">
           <form action="/candidateApplication" method="POST">
             <div class="form-group">
-              <label for="text">User Id <%= election[0].user_id  %> </label>
+              <label for="text">User Id: <%= election[0].user_id  %> </label>
             </div>
             <div class="form-group">
               <label for="text">Candidate name</label>
@@ -17,7 +17,7 @@
               <label for="text">Election Id</label>
               <input type="text" class="form-control" name="eleid" placeholder="Enter Election ID">
             </div>
-            
+
             <div class="form-group">
               <label for="text">Election Name</label>
               <input type="text" class="form-control" name="elename" placeholder="Enter Election Name">
@@ -27,7 +27,7 @@
               <input type="text" class="form-control" name="class" placeholder="Class">
             </div>
             <div class="form-group">
-              <label for="text">Year <%= election[0].year %> </label>
+              <label for="text">Year: <%= election[0].year %> </label>
             </div>
             <div class="blue-button">
               <button type="submit" class="btn btn-lg btn-primary">Apply</button>

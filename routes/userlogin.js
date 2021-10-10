@@ -99,7 +99,7 @@ router.post("/vote", (req, res) => {
   setTimeout(() => {
     console.log(ret1);
     if (ret1.length !== 0) {
-      res.send("<h1>Dont multi vote ;)</h1>");
+      res.send("<h1>You cannot vote more than once</h1>");
       return;
     }
   }, 200);

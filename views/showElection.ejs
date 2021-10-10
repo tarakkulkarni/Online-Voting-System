@@ -4,10 +4,10 @@
 <% election.forEach((ele) => { %>
    <div class="show-elections">
     <ul class="list-group">
-        <li class="list-group-item active">ID <%= ele.election_id %></li>
-        <li class="show-election-row list-group-item">Name <%= ele.election_name %></li>
-        <li class="show-election-row list-group-item">Class <%= ele.election_class %></li>
-        <li class="show-election-row list-group-item">Year <%= ele.year %></li>
+        <li class="list-group-item active">Election ID: <%= ele.election_id %></li>
+        <li class="show-election-row list-group-item">Election Name: <%= ele.election_name %></li>
+        <li class="show-election-row list-group-item">Class: <%= ele.election_class %></li>
+        <li class="show-election-row list-group-item">Year: <%= ele.year %></li>
       </ul>
   </div>
 <% }); %>
