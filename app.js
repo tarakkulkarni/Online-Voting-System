@@ -170,12 +170,12 @@ app
         if (e) throw e;
         res.redirect("/home");
       });
-      const sqlres = `Insert into results values ("${
-        req.body.eleid
-      }","${"C".concat(loginfo.id)}",0)`;
-      db.query(sqlres, (e, result) => {
-        if (e) throw e;
-      });
+      // const sqlres = `Insert into results values ("${
+      //   req.body.eleid
+      // }","${"C".concat(loginfo.id)}",0)`;
+      // db.query(sqlres, (e, result) => {
+      //   if (e) throw e;
+      // });
     } else {
       res.send(
         "<h1>You can only apply for the election for your own class</h1>"
