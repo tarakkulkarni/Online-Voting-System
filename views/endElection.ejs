@@ -1,0 +1,43 @@
+<%- include('partials/header') %>
+<div class="container mt-5">
+  <h1 class="main-heading">End Election</h1>
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="card">
+        <div class="card-body">
+          <form action="/endElection" method="POST">
+
+            <!-- <div class="form-group">
+              <label for="text">User Id </label>
+            </div>
+            <div class="form-group">
+              <label for="text">Candidate name</label>
+              <input type="text" class="form-control" name="can_name" placeholder="Enter candidate name">
+            </div>
+            <div class="form-group"> -->
+              <label for="text">Election Id</label>
+              <input type="text" class="form-control" name="eleid" placeholder="Enter Election ID">
+            </div>
+
+            <!-- <div class="form-group">
+              <label for="text">Election Name</label>
+              <input type="text" class="form-control" name="elename" placeholder="Enter Election Name">
+            </div>
+            <div class="form-group">
+              <label for="text">Class</label>
+              <input type="text" class="form-control" name="class" placeholder="Class">
+            </div>
+            <div class="form-group">
+
+            </div> -->
+
+            <div class="blue-button">
+              <button type="submit" class="btn btn-lg btn-danger">END</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<%- include('partials/footer') %>
