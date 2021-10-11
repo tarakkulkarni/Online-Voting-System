@@ -25,6 +25,10 @@
   text-align: center;
   margin: 20px;
 }
+.voter-heading{
+  text-align: center;
+  margin-top: 100px;
+}
 
 .form-control{
   display: inline-block;

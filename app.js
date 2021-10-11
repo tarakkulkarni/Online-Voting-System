@@ -3,6 +3,7 @@ const ejs = require("ejs");
 const db = require("./connection");
 require("dotenv").config();
 
+
 //middleware
 const app = express();
 app.set("view engine", "ejs");
@@ -16,12 +17,6 @@ app.use("/home", home);
 //user tasks
 const userlogin = require("./routes/userlogin");
 app.use("", userlogin);
-
-// const candidateApplication = require("./routes/candidateApplication");
-// app.use("/candidateApplication", candidateApplication);
-
-// const vote = require("./routes/vote");
-// app.use("/vote", vote);
 
 //admin tasks
 const admin = require("./routes/admin");

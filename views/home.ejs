@@ -1,12 +1,31 @@
 <%- include('partials/header') %>
 <h1 class="main-heading"> Welcome </h1>
+
+</div>
 <form action = "/home" method = "POST">
-    <!-- <a class="btn btn-lg btn-primary btn-block" href="/createElection" role="button">Create Election</a> -->
-    <div class="blue-button">
-      <a class="btn btn-lg btn-primary" href="/candidateApplication" role="button">Apply As Candidate</a>
-    </div>
-    <div class="blue-button">
+  <!-- <div class="card-group">
+  <div class="card border-primary mb-3" style="max-width: 18rem;">
+    <div class="card-header">Header</div>
+    <div class="card-body text-primary">
+      <h5 class="card-title">Primary card title</h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+      <div class="blue-button">
+        <a class="btn btn-lg btn-primary" href="/candidateApplication" role="button">Apply As Candidate</a>
+      </div>
+    <!-- </div>
+  </div> -->
+  <!-- <div class="card border-primary mb-3" style="max-width: 18rem;">
+    <div class="card-header">Header</div>
+    <div class="card-body text-primary">
+      <h5 class="card-title">Primary card title</h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+      <div class="blue-button">
         <a class="btn btn-lg btn-primary" href="/vote" role="button">Vote for Candidate</a>
     </div>
+    <!-- </div>
+  </div> -->
+</div>
+    
+    
 </form>
 <%- include('partials/footer') %>
