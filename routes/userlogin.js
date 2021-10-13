@@ -3,6 +3,7 @@ const router = express.Router();
 const path = require("path");
 const db = require("../connection");
 
+
 let loginfo = {
   id: String,
   class: String,
@@ -42,6 +43,7 @@ router.post("/", (req, res) => {
   }, 200);
 });
 
+
 //candidateApplication
 router.get("/candidateApplication", (req, res) => {
   const data = [];
@@ -66,6 +68,7 @@ router.post("/candidateApplication", (req, res) => {
       if (e) throw e;
       res.redirect("/home");
     });
+    
   } else {
     res.send("<h1>You can only apply for the election for your own class</h1>");
   }
